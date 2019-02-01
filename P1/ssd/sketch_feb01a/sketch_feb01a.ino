@@ -14,14 +14,16 @@
  int del =1000;
 
 void setup(){
- pinMode(a, OUTPUT);
- pinMode(b, OUTPUT); 
- pinMode(c, OUTPUT); 
- pinMode(d, OUTPUT); 
- pinMode(e, OUTPUT); 
- pinMode(f, OUTPUT); 
- pinMode(g, OUTPUT); 
- pinMode(h, OUTPUT);
+  pinMode(a, OUTPUT);
+  pinMode(b, OUTPUT); 
+  pinMode(c, OUTPUT); 
+  pinMode(d, OUTPUT); 
+  pinMode(e, OUTPUT); 
+  pinMode(f, OUTPUT); 
+  pinMode(g, OUTPUT); 
+  pinMode(h, OUTPUT);
+ 
+  pinMode(52, INPUT);
 
   digitalWrite(a, HIGH);
   digitalWrite(b, HIGH);
@@ -34,27 +36,57 @@ void setup(){
 
 }
 
+int i = 0;
+boolean countUp = true;
+
 void loop(){
-  zero();
-  delay(del);
-  one();
-  delay(del);
-  two();
-  delay(del);
-  three();
-  delay(del);
-  four();
-  delay(del);
-  five();
-  delay(del);
-  six();
-  delay(del);
-  seven();
-  delay(del);
-  eight();
-  delay(del);
-  nine();
+  switch(i){
+    case 0:
+      zero();
+      break;
+    case 1:
+      one();
+      break;
+    case 2:
+      two();
+      break;
+    case 3:
+      three();
+      break;
+    case 4:
+      four();
+      break;
+    case 5:
+      five();
+      break;
+    case 6:
+      six();
+      break;
+    case 7:
+      seven();
+      break;
+    case 8:
+      eight();
+      break;
+    case 9:
+      nine();
+      break;
+  }
+  
   delay(del); 
+  
+  Serial.println(digitalRead(52));
+  if(digitalRead(52) == HIGH){
+    countUp = !countUp; 
+  }
+  
+  if(countUp){
+    i++;
+    i %= 10;
+  }else{
+    i--;
+    i = i<0 ? 9 : i;
+  }
 }
 
 void one(){
